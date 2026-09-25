@@ -189,7 +189,7 @@ module readerRoles '../security/role.bicep' = [
 
 // ── Health Model ──
 
-resource healthModel 'Microsoft.CloudHealth/healthModels@2026-01-01-preview' = {
+resource healthModel 'Microsoft.CloudHealth/healthModels@2026-05-01-preview' = {
   name: name
   location: location
   tags: tags
@@ -206,7 +206,7 @@ resource healthModel 'Microsoft.CloudHealth/healthModels@2026-01-01-preview' = {
 
 // ── Authentication Settings ──
 
-resource authReader 'Microsoft.CloudHealth/healthModels/authenticationsettings@2026-01-01-preview' = {
+resource authReader 'Microsoft.CloudHealth/healthModels/authenticationsettings@2026-05-01-preview' = {
   parent: healthModel
   name: 'auth-reader'
   properties: {
@@ -222,7 +222,7 @@ resource authReader 'Microsoft.CloudHealth/healthModels/authenticationsettings@2
 
 // ── Search signals (always) ──
 
-resource sdSearchLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdSearchLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-search-latency'
   properties: {
@@ -241,7 +241,7 @@ resource sdSearchLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
   }
 }
 
-resource sdSearchQps 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdSearchQps 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-search-qps'
   properties: {
@@ -260,7 +260,7 @@ resource sdSearchQps 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-
   }
 }
 
-resource sdSearchThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdSearchThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-search-throttle'
   properties: {
@@ -279,7 +279,7 @@ resource sdSearchThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@
   }
 }
 
-resource sdSearchDocsProcessed 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdSearchDocsProcessed 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-search-docs-processed'
   properties: {
@@ -298,7 +298,7 @@ resource sdSearchDocsProcessed 'Microsoft.CloudHealth/healthModels/signaldefinit
   }
 }
 
-resource sdSearchIndexSize 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdSearchIndexSize 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-search-index-size'
   properties: {
@@ -319,7 +319,7 @@ resource sdSearchIndexSize 'Microsoft.CloudHealth/healthModels/signaldefinitions
 
 // ── Document Intelligence signals (always — unconditional resource) ──
 
-resource sdDocIntelSuccessRate 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdDocIntelSuccessRate 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-docintel-success-rate'
   properties: {
@@ -338,7 +338,7 @@ resource sdDocIntelSuccessRate 'Microsoft.CloudHealth/healthModels/signaldefinit
   }
 }
 
-resource sdDocIntelLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdDocIntelLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-docintel-latency'
   properties: {
@@ -357,7 +357,7 @@ resource sdDocIntelLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions
   }
 }
 
-resource sdDocIntelErrors 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdDocIntelErrors 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-docintel-errors'
   properties: {
@@ -376,7 +376,7 @@ resource sdDocIntelErrors 'Microsoft.CloudHealth/healthModels/signaldefinitions@
   }
 }
 
-resource sdDocIntelPages 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdDocIntelPages 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-docintel-pages'
   properties: {
@@ -397,7 +397,7 @@ resource sdDocIntelPages 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
 
 // ── Storage signals (always) ──
 
-resource sdStorageTransactions 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdStorageTransactions 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-storage-transactions'
   properties: {
@@ -416,7 +416,7 @@ resource sdStorageTransactions 'Microsoft.CloudHealth/healthModels/signaldefinit
   }
 }
 
-resource sdStorageLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = {
+resource sdStorageLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = {
   parent: healthModel
   name: 'sd-storage-latency'
   properties: {
@@ -437,7 +437,7 @@ resource sdStorageLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@
 
 // ── Container Apps signals (conditional) ──
 
-resource sdBackendCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (isContainerApps) {
+resource sdBackendCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'sd-backend-cpu'
   properties: {
@@ -456,7 +456,7 @@ resource sdBackendCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026
   }
 }
 
-resource sdBackendMemory 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (isContainerApps) {
+resource sdBackendMemory 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'sd-backend-memory'
   properties: {
@@ -475,7 +475,7 @@ resource sdBackendMemory 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
   }
 }
 
-resource sdBackendRestarts 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (isContainerApps) {
+resource sdBackendRestarts 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'sd-backend-restarts'
   properties: {
@@ -494,7 +494,7 @@ resource sdBackendRestarts 'Microsoft.CloudHealth/healthModels/signaldefinitions
   }
 }
 
-resource sdBackendRequests 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (isContainerApps) {
+resource sdBackendRequests 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'sd-backend-requests'
   properties: {
@@ -513,7 +513,7 @@ resource sdBackendRequests 'Microsoft.CloudHealth/healthModels/signaldefinitions
   }
 }
 
-resource sdAcaIngressCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (isContainerApps) {
+resource sdAcaIngressCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'sd-aca-ingress-cpu'
   properties: {
@@ -534,7 +534,7 @@ resource sdAcaIngressCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
 
 // ── OpenAI signals (conditional) ──
 
-resource sdOpenaiAvailability 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiAvailability 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-availability'
   properties: {
@@ -553,7 +553,7 @@ resource sdOpenaiAvailability 'Microsoft.CloudHealth/healthModels/signaldefiniti
   }
 }
 
-resource sdOpenaiLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-latency'
   properties: {
@@ -572,7 +572,7 @@ resource sdOpenaiLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
   }
 }
 
-resource sdOpenaiThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-throttle'
   properties: {
@@ -591,7 +591,7 @@ resource sdOpenaiThrottle 'Microsoft.CloudHealth/healthModels/signaldefinitions@
   }
 }
 
-resource sdOpenaiTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-tokens'
   properties: {
@@ -610,7 +610,7 @@ resource sdOpenaiTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@20
   }
 }
 
-resource sdOpenaiClientErrors 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiClientErrors 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-client-errors'
   properties: {
@@ -629,7 +629,7 @@ resource sdOpenaiClientErrors 'Microsoft.CloudHealth/healthModels/signaldefiniti
   }
 }
 
-resource sdOpenaiRatelimit 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiRatelimit 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-ratelimit'
   properties: {
@@ -648,7 +648,7 @@ resource sdOpenaiRatelimit 'Microsoft.CloudHealth/healthModels/signaldefinitions
   }
 }
 
-resource sdOpenaiInputTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiInputTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-input-tokens'
   properties: {
@@ -667,7 +667,7 @@ resource sdOpenaiInputTokens 'Microsoft.CloudHealth/healthModels/signaldefinitio
   }
 }
 
-resource sdOpenaiOutputTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiOutputTokens 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-output-tokens'
   properties: {
@@ -686,7 +686,7 @@ resource sdOpenaiOutputTokens 'Microsoft.CloudHealth/healthModels/signaldefiniti
   }
 }
 
-resource sdOpenaiBlockedCalls 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource sdOpenaiBlockedCalls 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'sd-openai-blocked-calls'
   properties: {
@@ -707,7 +707,7 @@ resource sdOpenaiBlockedCalls 'Microsoft.CloudHealth/healthModels/signaldefiniti
 
 // ── Application Insights signals (conditional) ──
 
-resource sdAppinsightsFailedRequests 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdAppinsightsFailedRequests 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-appinsights-failed-requests'
   properties: {
@@ -726,7 +726,7 @@ resource sdAppinsightsFailedRequests 'Microsoft.CloudHealth/healthModels/signald
   }
 }
 
-resource sdAppinsightsExceptions 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdAppinsightsExceptions 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-appinsights-exceptions'
   properties: {
@@ -745,7 +745,7 @@ resource sdAppinsightsExceptions 'Microsoft.CloudHealth/healthModels/signaldefin
   }
 }
 
-resource sdAppinsightsResponseTime 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdAppinsightsResponseTime 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-appinsights-response-time'
   properties: {
@@ -764,7 +764,7 @@ resource sdAppinsightsResponseTime 'Microsoft.CloudHealth/healthModels/signaldef
   }
 }
 
-resource sdDependencyFailures 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdDependencyFailures 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-dependency-failures'
   properties: {
@@ -783,7 +783,7 @@ resource sdDependencyFailures 'Microsoft.CloudHealth/healthModels/signaldefiniti
   }
 }
 
-resource sdDependencyDuration 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdDependencyDuration 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-dependency-duration'
   properties: {
@@ -802,7 +802,7 @@ resource sdDependencyDuration 'Microsoft.CloudHealth/healthModels/signaldefiniti
   }
 }
 
-resource sdAppinsightsTraces 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-01-01-preview' = if (useApplicationInsights) {
+resource sdAppinsightsTraces 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'sd-appinsights-traces'
   properties: {
@@ -827,7 +827,7 @@ resource sdAppinsightsTraces 'Microsoft.CloudHealth/healthModels/signaldefinitio
 
 // ── Use-case group: RAG Chat (always) ──
 
-resource entityRagChat 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = {
+resource entityRagChat 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = {
   parent: healthModel
   name: 'e-rag-chat'
   properties: {
@@ -839,7 +839,7 @@ resource entityRagChat 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-p
 }
 
 // Backend App — Container Apps variant
-resource entityBackendComputeAca 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (isContainerApps) {
+resource entityBackendComputeAca 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'e-backend-compute'
   properties: {
@@ -863,7 +863,7 @@ resource entityBackendComputeAca 'Microsoft.CloudHealth/healthModels/entities@20
 }
 
 // Backend App — App Service variant
-resource entityBackendComputeAppSvc 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (isAppService) {
+resource entityBackendComputeAppSvc 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (isAppService) {
   parent: healthModel
   name: 'e-backend-compute'
   properties: {
@@ -880,7 +880,7 @@ resource entityBackendComputeAppSvc 'Microsoft.CloudHealth/healthModels/entities
     }
   }
 }
-resource entityAiInference 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource entityAiInference 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'e-ai-inference'
   properties: {
@@ -909,7 +909,7 @@ resource entityAiInference 'Microsoft.CloudHealth/healthModels/entities@2026-01-
 }
 
 // Knowledge Search (always)
-resource entityKnowledgeSearch 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = {
+resource entityKnowledgeSearch 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = {
   parent: healthModel
   name: 'e-knowledge-search'
   properties: {
@@ -934,7 +934,7 @@ resource entityKnowledgeSearch 'Microsoft.CloudHealth/healthModels/entities@2026
 }
 
 // App Performance — application-level health signals bound to App Insights (under RAG Chat)
-resource entityAppPerformance 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useApplicationInsights) {
+resource entityAppPerformance 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'e-app-performance'
   properties: {
@@ -960,7 +960,7 @@ resource entityAppPerformance 'Microsoft.CloudHealth/healthModels/entities@2026-
 
 // ── Use-case group: Document Ingestion (always) ──
 
-resource entityDocIngestion 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = {
+resource entityDocIngestion 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = {
   parent: healthModel
   name: 'e-doc-ingestion'
   properties: {
@@ -972,7 +972,7 @@ resource entityDocIngestion 'Microsoft.CloudHealth/healthModels/entities@2026-01
 }
 
 // Document Storage (always)
-resource entityDocStorage 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = {
+resource entityDocStorage 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = {
   parent: healthModel
   name: 'e-doc-storage'
   properties: {
@@ -994,7 +994,7 @@ resource entityDocStorage 'Microsoft.CloudHealth/healthModels/entities@2026-01-0
 }
 
 // Document Intelligence (always — Cognitive Services metrics for document parsing)
-resource entityDocIntelligence 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = {
+resource entityDocIntelligence 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = {
   parent: healthModel
   name: 'e-doc-intelligence'
   properties: {
@@ -1019,7 +1019,7 @@ resource entityDocIntelligence 'Microsoft.CloudHealth/healthModels/entities@2026
 
 // ── Use-case group: Speech (conditional) ──
 
-resource entitySpeech 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useSpeechOutputAzure) {
+resource entitySpeech 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useSpeechOutputAzure) {
   parent: healthModel
   name: 'e-speech'
   properties: {
@@ -1030,7 +1030,7 @@ resource entitySpeech 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-pr
   }
 }
 
-resource entitySpeechService 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useSpeechOutputAzure) {
+resource entitySpeechService 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useSpeechOutputAzure) {
   parent: healthModel
   name: 'e-speech-service'
   properties: {
@@ -1050,7 +1050,7 @@ resource entitySpeechService 'Microsoft.CloudHealth/healthModels/entities@2026-0
 
 // ── Use-case group: Authentication & History (conditional) ──
 
-resource entityAuthHistory 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useAuthenticationWithCosmos) {
+resource entityAuthHistory 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useAuthenticationWithCosmos) {
   parent: healthModel
   name: 'e-auth-history'
   properties: {
@@ -1061,7 +1061,7 @@ resource entityAuthHistory 'Microsoft.CloudHealth/healthModels/entities@2026-01-
   }
 }
 
-resource entityCosmosDb 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useAuthenticationWithCosmos) {
+resource entityCosmosDb 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useAuthenticationWithCosmos) {
   parent: healthModel
   name: 'e-cosmos-db'
   properties: {
@@ -1081,7 +1081,7 @@ resource entityCosmosDb 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-
 
 // ── Use-case group: Platform (conditional on containerapps) ──
 
-resource entityPlatform 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (isContainerApps) {
+resource entityPlatform 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'e-platform'
   properties: {
@@ -1092,7 +1092,7 @@ resource entityPlatform 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-
   }
 }
 
-resource entityContainerPlatform 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (isContainerApps) {
+resource entityContainerPlatform 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'e-container-platform'
   properties: {
@@ -1114,7 +1114,7 @@ resource entityContainerPlatform 'Microsoft.CloudHealth/healthModels/entities@20
 
 // ── Use-case group: Observability (conditional on Application Insights) ──
 
-resource entityObservability 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useApplicationInsights) {
+resource entityObservability 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'e-observability'
   properties: {
@@ -1125,7 +1125,7 @@ resource entityObservability 'Microsoft.CloudHealth/healthModels/entities@2026-0
   }
 }
 
-resource entityAppTelemetry 'Microsoft.CloudHealth/healthModels/entities@2026-01-01-preview' = if (useApplicationInsights) {
+resource entityAppTelemetry 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'e-app-telemetry'
   properties: {
@@ -1150,7 +1150,7 @@ resource entityAppTelemetry 'Microsoft.CloudHealth/healthModels/entities@2026-01
 // ══════════════════════════════════════════════════════════════════════
 
 // Root → use-case groups
-resource relRootRagChat 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = {
+resource relRootRagChat 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = {
   parent: healthModel
   name: 'r-root-rag-chat'
   properties: {
@@ -1159,7 +1159,7 @@ resource relRootRagChat 'Microsoft.CloudHealth/healthModels/relationships@2026-0
   }
 }
 
-resource relRootDocIngestion 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = {
+resource relRootDocIngestion 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = {
   parent: healthModel
   name: 'r-root-doc-ingestion'
   properties: {
@@ -1168,7 +1168,7 @@ resource relRootDocIngestion 'Microsoft.CloudHealth/healthModels/relationships@2
   }
 }
 
-resource relRootSpeech 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useSpeechOutputAzure) {
+resource relRootSpeech 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useSpeechOutputAzure) {
   parent: healthModel
   name: 'r-root-speech'
   properties: {
@@ -1177,7 +1177,7 @@ resource relRootSpeech 'Microsoft.CloudHealth/healthModels/relationships@2026-01
   }
 }
 
-resource relRootAuthHistory 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useAuthenticationWithCosmos) {
+resource relRootAuthHistory 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useAuthenticationWithCosmos) {
   parent: healthModel
   name: 'r-root-auth-history'
   properties: {
@@ -1186,7 +1186,7 @@ resource relRootAuthHistory 'Microsoft.CloudHealth/healthModels/relationships@20
   }
 }
 
-resource relRootPlatform 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (isContainerApps) {
+resource relRootPlatform 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'r-root-platform'
   properties: {
@@ -1195,7 +1195,7 @@ resource relRootPlatform 'Microsoft.CloudHealth/healthModels/relationships@2026-
   }
 }
 
-resource relRootObservability 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useApplicationInsights) {
+resource relRootObservability 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'r-root-observability'
   properties: {
@@ -1205,7 +1205,7 @@ resource relRootObservability 'Microsoft.CloudHealth/healthModels/relationships@
 }
 
 // RAG Chat children
-resource relRagBackendAca 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (isContainerApps) {
+resource relRagBackendAca 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'r-rag-chat-backend-compute'
   properties: {
@@ -1214,7 +1214,7 @@ resource relRagBackendAca 'Microsoft.CloudHealth/healthModels/relationships@2026
   }
 }
 
-resource relRagBackendAppSvc 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (isAppService) {
+resource relRagBackendAppSvc 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (isAppService) {
   parent: healthModel
   name: 'r-rag-chat-backend-compute'
   properties: {
@@ -1223,7 +1223,7 @@ resource relRagBackendAppSvc 'Microsoft.CloudHealth/healthModels/relationships@2
   }
 }
 
-resource relRagAiInference 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (deployAzureOpenAi) {
+resource relRagAiInference 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (deployAzureOpenAi) {
   parent: healthModel
   name: 'r-rag-chat-ai-inference'
   properties: {
@@ -1232,7 +1232,7 @@ resource relRagAiInference 'Microsoft.CloudHealth/healthModels/relationships@202
   }
 }
 
-resource relRagKnowledgeSearch 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = {
+resource relRagKnowledgeSearch 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = {
   parent: healthModel
   name: 'r-rag-chat-knowledge-search'
   properties: {
@@ -1241,7 +1241,7 @@ resource relRagKnowledgeSearch 'Microsoft.CloudHealth/healthModels/relationships
   }
 }
 
-resource relRagAppPerformance 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useApplicationInsights) {
+resource relRagAppPerformance 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'r-rag-chat-app-performance'
   properties: {
@@ -1251,7 +1251,7 @@ resource relRagAppPerformance 'Microsoft.CloudHealth/healthModels/relationships@
 }
 
 // Document Ingestion children
-resource relDocIngestionStorage 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = {
+resource relDocIngestionStorage 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = {
   parent: healthModel
   name: 'r-doc-ingestion-storage'
   properties: {
@@ -1260,7 +1260,7 @@ resource relDocIngestionStorage 'Microsoft.CloudHealth/healthModels/relationship
   }
 }
 
-resource relDocIngestionIntelligence 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = {
+resource relDocIngestionIntelligence 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = {
   parent: healthModel
   name: 'r-doc-ingestion-intelligence'
   properties: {
@@ -1270,7 +1270,7 @@ resource relDocIngestionIntelligence 'Microsoft.CloudHealth/healthModels/relatio
 }
 
 // Speech children
-resource relSpeechService 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useSpeechOutputAzure) {
+resource relSpeechService 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useSpeechOutputAzure) {
   parent: healthModel
   name: 'r-speech-service'
   properties: {
@@ -1280,7 +1280,7 @@ resource relSpeechService 'Microsoft.CloudHealth/healthModels/relationships@2026
 }
 
 // Auth & History children
-resource relAuthCosmosDb 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useAuthenticationWithCosmos) {
+resource relAuthCosmosDb 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useAuthenticationWithCosmos) {
   parent: healthModel
   name: 'r-auth-history-cosmos-db'
   properties: {
@@ -1290,7 +1290,7 @@ resource relAuthCosmosDb 'Microsoft.CloudHealth/healthModels/relationships@2026-
 }
 
 // Platform children
-resource relPlatformContainer 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (isContainerApps) {
+resource relPlatformContainer 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (isContainerApps) {
   parent: healthModel
   name: 'r-platform-container-platform'
   properties: {
@@ -1300,7 +1300,7 @@ resource relPlatformContainer 'Microsoft.CloudHealth/healthModels/relationships@
 }
 
 // Observability children
-resource relObservabilityAppTelemetry 'Microsoft.CloudHealth/healthModels/relationships@2026-01-01-preview' = if (useApplicationInsights) {
+resource relObservabilityAppTelemetry 'Microsoft.CloudHealth/healthModels/relationships@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'r-observability-app-telemetry'
   properties: {
