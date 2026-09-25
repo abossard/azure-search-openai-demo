@@ -1587,7 +1587,7 @@ module documentIntelligenceRoleBackend 'core/security/role.bicep' = if (useUserU
 module healthModel 'core/monitor/health-model.bicep' = if (useHealthModel) {
   scope: resourceGroup
   params: {
-    name: 'hm-${environmentName}-v2'
+    name: 'hm-${environmentName}'
     location: healthModelLocation
     tags: tags
     deploymentTarget: deploymentTarget

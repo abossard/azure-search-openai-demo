@@ -517,17 +517,36 @@ resource sdAcaIngressCpu 'Microsoft.CloudHealth/healthModels/signaldefinitions@2
   parent: healthModel
   name: 'sd-aca-ingress-cpu'
   properties: {
-    displayName: 'ACA Ingress CPU'
+    displayName: 'Ingress CPU Usage Percentage'
     signalKind: 'AzureResourceMetric'
     dataUnit: 'Percent'
-    refreshInterval: 'PT5M'
+    refreshInterval: 'PT1M'
     metricNamespace: 'microsoft.app/managedenvironments'
     metricName: 'IngressCpuPercentage'
     aggregationType: 'Average'
     timeGrain: 'PT5M'
     evaluationRules: {
-      degradedRule: { operator: 'GreaterThan', threshold: 70 }
-      unhealthyRule: { operator: 'GreaterThan', threshold: 90 }
+      degradedRule: { operator: 'GreaterThan', threshold: 90 }
+      unhealthyRule: { operator: 'GreaterThan', threshold: 95 }
+    }
+  }
+}
+
+resource sdAcaIngressMemory 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (isContainerApps) {
+  parent: healthModel
+  name: 'sd-aca-ingress-memory'
+  properties: {
+    displayName: 'Ingress Memory Usage Percentage'
+    signalKind: 'AzureResourceMetric'
+    dataUnit: 'Percent'
+    refreshInterval: 'PT1M'
+    metricNamespace: 'microsoft.app/managedenvironments'
+    metricName: 'IngressMemoryPercentage'
+    aggregationType: 'Average'
+    timeGrain: 'PT5M'
+    evaluationRules: {
+      degradedRule: { operator: 'GreaterThan', threshold: 90 }
+      unhealthyRule: { operator: 'GreaterThan', threshold: 95 }
     }
   }
 }
@@ -701,6 +720,46 @@ resource sdOpenaiBlockedCalls 'Microsoft.CloudHealth/healthModels/signaldefiniti
     evaluationRules: {
       degradedRule: { operator: 'GreaterThan', threshold: 1 }
       unhealthyRule: { operator: 'GreaterThan', threshold: 10 }
+    }
+  }
+}
+
+// ── Speech signals (conditional) ──
+
+resource sdSpeechSuccessRate 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useSpeechOutputAzure) {
+  parent: healthModel
+  name: 'sd-speech-success-rate'
+  properties: {
+    displayName: 'Speech Success Rate'
+    signalKind: 'AzureResourceMetric'
+    dataUnit: 'Percent'
+    refreshInterval: 'PT1M'
+    metricNamespace: 'microsoft.cognitiveservices/accounts'
+    metricName: 'SuccessRate'
+    aggregationType: 'Average'
+    timeGrain: 'PT5M'
+    evaluationRules: {
+      degradedRule: { operator: 'LessThan', threshold: 100 }
+      unhealthyRule: { operator: 'LessThan', threshold: 95 }
+    }
+  }
+}
+
+resource sdSpeechLatency 'Microsoft.CloudHealth/healthModels/signaldefinitions@2026-05-01-preview' = if (useSpeechOutputAzure) {
+  parent: healthModel
+  name: 'sd-speech-latency'
+  properties: {
+    displayName: 'Speech Latency'
+    signalKind: 'AzureResourceMetric'
+    dataUnit: 'MilliSeconds'
+    refreshInterval: 'PT1M'
+    metricNamespace: 'microsoft.cognitiveservices/accounts'
+    metricName: 'Latency'
+    aggregationType: 'Average'
+    timeGrain: 'PT5M'
+    evaluationRules: {
+      degradedRule: { operator: 'GreaterThan', threshold: 200 }
+      unhealthyRule: { operator: 'GreaterThan', threshold: 500 }
     }
   }
 }
@@ -933,12 +992,12 @@ resource entityKnowledgeSearch 'Microsoft.CloudHealth/healthModels/entities@2026
   }
 }
 
-// App Performance — application-level health signals bound to App Insights (under RAG Chat)
+// App Insights — application-level health signals (under RAG Chat)
 resource entityAppPerformance 'Microsoft.CloudHealth/healthModels/entities@2026-05-01-preview' = if (useApplicationInsights) {
   parent: healthModel
   name: 'e-app-performance'
   properties: {
-    displayName: 'App Performance'
+    displayName: 'App Insights'
     impact: 'Standard'
     icon: { iconName: 'Resource' }
     canvasPosition: leafPosition(xRagChat, 2, canvasLeafSpacing, canvasLeafRow)
@@ -1042,7 +1101,10 @@ resource entitySpeechService 'Microsoft.CloudHealth/healthModels/entities@2026-0
       azureResource: {
         authenticationSetting: authReader.name
         azureResourceId: speechServiceResourceId
-        signals: []
+        signals: [
+          { name: 'sa-speech-success-rate', signalDefinitionName: sdSpeechSuccessRate.name, signalKind: 'AzureResourceMetric', refreshInterval: 'PT1M' }
+          { name: 'sa-speech-latency', signalDefinitionName: sdSpeechLatency.name, signalKind: 'AzureResourceMetric', refreshInterval: 'PT1M' }
+        ]
       }
     }
   }
@@ -1105,7 +1167,8 @@ resource entityContainerPlatform 'Microsoft.CloudHealth/healthModels/entities@20
         authenticationSetting: authReader.name
         azureResourceId: managedEnvironmentResourceId
         signals: [
-          { name: 'sa-aca-ingress-cpu', signalDefinitionName: sdAcaIngressCpu.name, signalKind: 'AzureResourceMetric', refreshInterval: 'PT5M' }
+          { name: 'sa-aca-ingress-cpu', signalDefinitionName: sdAcaIngressCpu.name, signalKind: 'AzureResourceMetric', refreshInterval: 'PT1M' }
+          { name: 'sa-aca-ingress-memory', signalDefinitionName: sdAcaIngressMemory.name, signalKind: 'AzureResourceMetric', refreshInterval: 'PT1M' }
         ]
       }
     }
